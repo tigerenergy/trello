@@ -1,29 +1,28 @@
 import React from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { hourSelector, minuteState } from './atoms'
-
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 
 function App() {
-  const [minutes, setMinutes] = useRecoilState(minuteState)
-  const [hours, setHours] = useRecoilState(hourSelector)
-  const onMinutesChange = (event: React.FormEvent<HTMLInputElement>) => 
+  const onDragEnd = () =>
   {
-    setMinutes(+event.currentTarget.value)
-  }
-  const onHoursChange = (event: React.FormEvent<HTMLInputElement>) =>
-  {
-    setHours(+event.currentTarget.value)
+
   }
   return (
+  <DragDropContext onDragEnd={onDragEnd}>
     <div>
-      <input
-        value={minutes}
-        onChange={onMinutesChange}
-        type='number'
-        placeholder='Minutes'
-      />
-      <input onChange={onHoursChange} value={hours} type='number' placeholder='Hours' />
+      <Droppable droppableId='one'>
+        {() => (
+        <ul>
+          <Draggable draggableId='first' index={0}>
+          {()=> <li>😀</li>}
+          </Draggable>
+          <Draggable draggableId='second' index={1}>
+          {()=> <li>😁</li>}
+          </Draggable>
+        </ul>
+        )}
+        </Droppable>
     </div>
+  </DragDropContext>
   )
 }
 
