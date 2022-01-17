@@ -5,6 +5,8 @@ import styled from 'styled-components'
 
 const Card = styled.div
 `
+display: flex;
+justify-content: center;
 margin-bottom: 10px;
 border-radius: 5px;
 padding: 10px 10px;
