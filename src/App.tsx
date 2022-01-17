@@ -3,6 +3,7 @@ import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautif
 import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
 import { toDoState } from './atoms'
+import DragabbleCard from './Components/DragabbleCard'
 
 const Wrapper = styled.div
 `
@@ -33,18 +34,7 @@ box-shadow: -10px -10px 30px #fff, 10px 10px 30px #aeaec040;
 background-color: ${(props) => props.theme.bgColor}
 `
 
-const Card = styled.div
-`
-margin-bottom: 10px;
-border-radius: 5px;
-padding: 10px 10px;
-background: #f0f0f3;
-    box-shadow: -10px -10px 30px #fff, 10px 10px 30px #aeaec040, inset -10px -10px 10px #aeaec025, inset 10px 10px 10px #fff;
-    &:active
-    {
-    box-shadow: inset -10px -10px 10px #ffffff70, inset 10px 10px 10px #aeaec020;
-    }
-`
+
 
 function App() 
 
@@ -68,10 +58,10 @@ function App()
       <Droppable  droppableId='one'>
         {(magic) => (
         <Board ref={magic.innerRef}{...magic.droppableProps}>
-          {toDos.map((toDo, index) =>(<Draggable key={toDo} draggableId={toDo} index={index}>
-          {(magic)=> 
-          <Card ref={magic.innerRef}{...magic.draggableProps}{...magic.dragHandleProps}>{toDo}</Card>}
-          </Draggable>))}
+          {toDos.map((toDo, index) =>
+          (
+            <DragabbleCard key={toDo} index={index} toDo={toDo} />
+          ))}
           {magic.placeholder}
         </Board>
         )}
